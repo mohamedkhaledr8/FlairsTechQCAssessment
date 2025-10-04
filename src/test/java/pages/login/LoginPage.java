@@ -1,6 +1,6 @@
 package pages.login;
 
-import element.ElementActions;
+import gui.element.ElementActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -13,9 +13,9 @@ public class LoginPage {
     }
 
     public void login(String userName, String password) {
-        elementActions.typeText(By.name("username"), userName);
-        elementActions.typeText(By.name("password"), password);
-        elementActions.submit(By.xpath("//button[@type='submit']"));
+        elementActions.type(By.name("username"), userName);
+        elementActions.type(By.name("password"), password);
+        elementActions.click(By.xpath("//button[@type='submit']"));
 
     }
 }

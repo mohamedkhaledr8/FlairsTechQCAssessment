@@ -1,6 +1,6 @@
 package pages.admin;
 
-import element.ElementActions;
+import gui.element.ElementActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -13,41 +13,50 @@ public class SaveSystemUserPage {
         elementActions = new ElementActions(driver);
     }
 
-    public void selectUserRole(int role) {
-        elementActions.clickElement(By.xpath("(//div[@class='oxd-select-wrapper'])[1]/div"));
+    public void selectUserRole() {
+        elementActions.click(By.xpath("(//div[@class='oxd-select-wrapper'])[1]/div"));
 
-        elementActions.clickElement(By.xpath("//div[@role='listbox']/div[@role='option'][" + role + "]"));
+        var options = elementActions.getElements(By.xpath("//div[@role='listbox']/div[@role='option']/span"));
+
+
+        String optionText = options.getLast().getText();
+        elementActions.click(By.xpath("//div[@role='listbox']/div[@role='option']/span[text()= '" + optionText + "']"));
     }
 
-    public void selectUserStatus(int status) {
-        elementActions.clickElement(By.xpath("(//div[@class='oxd-select-wrapper'])[2]/div"));
+    public void selectUserStatus() {
+        elementActions.click(By.xpath("(//div[@class='oxd-select-wrapper'])[2]/div"));
 
-        elementActions.clickElement(By.xpath("//div[@role='listbox']/div[@role='option'][" + status + "]"));
+        var options = elementActions.getElements(By.xpath("//div[@role='listbox']/div[@role='option']/span"));
+
+
+        String optionText = options.getLast().getText();
+        elementActions.click(By.xpath("//div[@role='listbox']/div[@role='option']/span[text()= '" + optionText + "']"));
     }
 
     public void selectEmployeeName(String subName) {
-        elementActions.typeText(By.xpath("//div[@class='oxd-autocomplete-wrapper']/descendant::input"), subName);
+        elementActions.type(By.xpath("//div[@class='oxd-autocomplete-wrapper']/descendant::input"), subName);
         var options = elementActions.getElements(By.xpath("//div[@role='listbox']/div[@role='option']/span"));
-        int randomIndex = new Random().nextInt(options.size());
-        String optionText = options.get(randomIndex).getText();
-        elementActions.clickElement(By.xpath("//div[@role='listbox']/div[@role='option']/span[text()= '" + optionText + "']"));
+
+        //int randomIndex = new Random().nextInt(options.size());
+        String optionText = options.getFirst().getText();
+        elementActions.click(By.xpath("//div[@role='listbox']/div[@role='option']/span[text()= '" + optionText + "']"));
 
     }
 
     public void typeUserName(String userName) {
-        elementActions.typeText(By.xpath("(//input[@autocomplete='off'])[1]"), userName);
+        elementActions.type(By.xpath("(//input[@autocomplete='off'])[1]"), userName);
     }
 
     public void typePassword(String password) {
-        elementActions.typeText(By.xpath("(//input[@autocomplete='off'])[2]"), password);
+        elementActions.type(By.xpath("(//input[@autocomplete='off'])[2]"), password);
     }
 
     public void typeConfirmPassword(String confirmPassword) {
-        elementActions.typeText(By.xpath("(//input[@autocomplete='off'])[3]"), confirmPassword);
+        elementActions.type(By.xpath("(//input[@autocomplete='off'])[3]"), confirmPassword);
     }
 
     public void clickSaveButton() {
-        elementActions.submit(By.xpath("//button[@type='submit']"));
+        elementActions.click(By.xpath("//button[@type='submit']"));
     }
 
 }
